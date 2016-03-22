@@ -79,7 +79,7 @@ public class AccountControllerTest {
         mockMvc.perform(post("/rest/accounts/1/blogs")
                 .content("{\"title\":\"Test Title\"}")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isNotFound());
     }
 
     @Test

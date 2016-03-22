@@ -1,14 +1,21 @@
 package tutorial.core.models.entities;
 
+import javax.persistence.*;
+
 /**
  * For project <tt>basic-web-app</tt>
  * <p>Created by dmv on 3/19/16.</p>
  *
  * <p>Links blog entry to a particular blog</p>
  */
+@Entity
 public class BlogEntry {
+    @Id
+    @GeneratedValue
     private Long id;
     private String title;
+    private String content;
+    @ManyToOne
     private Blog blog;
 
     public BlogEntry() {}
@@ -43,4 +50,11 @@ public class BlogEntry {
         this.blog = blog;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 }

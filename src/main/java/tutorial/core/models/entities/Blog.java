@@ -1,14 +1,23 @@
 package tutorial.core.models.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 /**
  * For project <tt>basic-web-app</tt>
  * <p>Created by dmv on 3/20/16.</p>
  *
  * <p>Useful information to link a particular blog with its author</p>
  */
+@Entity
 public class Blog {
+    @Id
+    @GeneratedValue
     private Long id;
     private String title;
+    @OneToOne
     private Account owner;
 
     public Blog() {}

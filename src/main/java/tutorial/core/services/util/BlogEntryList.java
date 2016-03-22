@@ -12,15 +12,12 @@ import java.util.List;
  * <p>Will be used by Resource Assembler to assemble a group of blog entries</p>
  */
 public class BlogEntryList {
+    private List<BlogEntry> entries = new ArrayList<BlogEntry>();
     private Long blogId;
-    private List<BlogEntry> entries= new ArrayList<BlogEntry>();
 
-    public Long getBlogId() {
-        return blogId;
-    }
-
-    public void setBlogId(Long blogId) {
+    public BlogEntryList(Long blogId, List<BlogEntry> entries) {
         this.blogId = blogId;
+        this.entries = entries;
     }
 
     public List<BlogEntry> getEntries() {
@@ -29,5 +26,13 @@ public class BlogEntryList {
 
     public void setEntries(List<BlogEntry> entries) {
         this.entries = entries;
+    }
+
+    public Long getBlogId() {
+        return blogId;
+    }
+
+    public void setBlogId(Long blogId) {
+        this.blogId = blogId;
     }
 }

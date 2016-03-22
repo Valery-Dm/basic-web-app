@@ -1,5 +1,6 @@
 package tutorial.rest.mvc;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import tutorial.core.models.entities.Blog;
-import tutorial.core.services.util.BlogEntryList;
 import tutorial.core.models.entities.BlogEntry;
 import tutorial.core.services.IBlogService;
 import tutorial.core.services.exceptions.BlogNotFoundException;
+import tutorial.core.services.util.BlogEntryList;
 import tutorial.core.services.util.BlogList;
 import tutorial.rest.exceptions.NotFoundException;
 import tutorial.rest.resources.BlogEntryListResource;
@@ -34,6 +35,7 @@ import java.net.URI;
 public class BlogController {
     private IBlogService blogService;
 
+    @Autowired
     public BlogController(IBlogService blogService) {
         this.blogService = blogService;
     }
@@ -48,8 +50,12 @@ public class BlogController {
     @RequestMapping(value="/{blogId}", method = RequestMethod.GET)
     public ResponseEntity<BlogResource> getBlog(@PathVariable Long blogId) {
         Blog blog = blogService.findBlog(blogId);
-        BlogResource res = new BlogResourceAsm().toResource(blog);
-        return new ResponseEntity<BlogResource>(res, HttpStatus.OK);
+        if(blog != null) {
+            BlogResource res = new BlogResourceAsm().toResource(blog);
+            return new ResponseEntity<BlogResource>(res, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<BlogResource>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @RequestMapping(value="/{blogId}/blog-entries", method = RequestMethod.POST)

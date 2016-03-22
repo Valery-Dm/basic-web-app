@@ -1,5 +1,6 @@
 package tutorial.rest.mvc;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import tutorial.rest.resources.asm.BlogEntryResourceAsm;
 public class BlogEntryController {
     private IBlogEntryService service;
 
+    @Autowired
     public BlogEntryController(IBlogEntryService service) {
         this.service = service;
     }
